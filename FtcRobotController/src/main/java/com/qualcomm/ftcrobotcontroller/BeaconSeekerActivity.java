@@ -1,7 +1,6 @@
 package com.qualcomm.ftcrobotcontroller;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,6 +31,7 @@ import java.util.Scanner;
  * This routine simply over-rides the Android life-cycle routines and inserts itself as needed.
  * Of course the layout had to be changed too to include the camera preview.
  * This code can be turned off at run time to improve performance if needed. See turnOffBeaconSeeker().
+ * Access mBeaconCenterPointPixels to get beacon point.
  */
 public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String  TAG              = "BeaconSeekerActivity";
@@ -43,6 +43,8 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
     private Mat mRgba;
     private Mat mRgbaT;
     private Mat mRgbaRotated;
+    static public Point mBeaconCenterPointPixels;
+    static public Point mBeaconCenterPointPercent;
     private Scalar CONTOUR_COLOR;
 
     String         _configPath = "/sdcard/FIRST/calibration.txt";
@@ -69,6 +71,9 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
             }
         }
     };
+    protected void toggleBeaconSeekerOnOff() {
+        mBeaconSeekerState = mBeaconSeekerState == BeaconSeekerStateEnum.Off ? BeaconSeekerStateEnum.On : BeaconSeekerStateEnum.Off;
+    }
     public void showToastMessage(String message) {
         final Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -114,8 +119,12 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
         Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
         Point blueCenter = drawRectangleAroundContours(mRgba, contours,  new Scalar(0, 0, 255));
 
-        Point center = new Point((redCenter.x + blueCenter.x)/2.0, (redCenter.y + blueCenter.y)/2.0);
-        Imgproc.circle(mRgba, center, 10, new Scalar(255,255,255), 10);
+        if ((blueCenter.x == 0.0 && blueCenter.y == 0.0) || (redCenter.x == 0.0 && redCenter.y == 0.0))
+            mBeaconCenterPointPixels = new Point(0.0, 0.0);
+        else
+            mBeaconCenterPointPixels = new Point((redCenter.x + blueCenter.x)/2.0, (redCenter.y + blueCenter.y)/2.0);
+        mBeaconCenterPointPercent = new Point(mBeaconCenterPointPixels.x/mRgba.width(), mBeaconCenterPointPixels.y/mRgba.height());
+        Imgproc.circle(mRgba, mBeaconCenterPointPixels, 10, new Scalar(255,255,100), 10);
 
         // OpenCv defaults to landscape on preview. This code rotates 90 degrees to portrait
         Mat tempMat = mRgba.t();

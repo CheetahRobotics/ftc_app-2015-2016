@@ -30,17 +30,9 @@
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import android.util.Log;
-
-import com.qualcomm.ftccommon.DbgLog;
-import com.qualcomm.ftcrobotcontroller.R;
+import com.qualcomm.ftcrobotcontroller.BeaconSeekerActivity;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.IrSeekerSensor;
-
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.LoaderCallbackInterface;
 
 /**
  * Follow an IR Beacon
@@ -78,8 +70,9 @@ public class BeaconSeekerOp extends OpMode {
   @Override
   public void loop() {
 
-    telemetry.addData("one", 1.0);
-    telemetry.addData("random", Math.random());
+    telemetry.addData("Beacon X,Y (Pixels)", ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.x) + "," + ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.y));
+    telemetry.addData("Beacon X,Y (Percent)", ((int) (100*BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
+            ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
 
   }
 }

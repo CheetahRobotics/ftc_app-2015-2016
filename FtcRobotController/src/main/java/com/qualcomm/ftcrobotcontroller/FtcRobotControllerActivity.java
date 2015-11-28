@@ -265,6 +265,9 @@ public class FtcRobotControllerActivity extends BeaconSeekerActivity {
       case R.id.action_exit_app:
         finish();
         return true;
+      case R.id.action_view_toggle_beacon_seeker:
+        toggleBeaconSeekerOnOff();
+        return true;
       case R.id.action_view_logs:
         // The string to launch this activity must match what's in AndroidManifest of FtcCommon for this activity.
         Intent viewLogsIntent = new Intent("com.qualcomm.ftccommon.ViewLogsActivity.intent.action.Launch");
