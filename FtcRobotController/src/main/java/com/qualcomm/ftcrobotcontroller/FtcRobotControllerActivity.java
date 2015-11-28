@@ -72,7 +72,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 
-public class FtcRobotControllerActivity extends Activity {
+public class FtcRobotControllerActivity extends BeaconSeekerActivity {
+  private static final String  TAG              = "FtcRobotControllerAct";
 
   private static final int REQUEST_CONFIG_WIFI_CHANNEL = 1;
   private static final boolean USE_DEVICE_EMULATION = false;
@@ -174,6 +175,7 @@ public class FtcRobotControllerActivity extends Activity {
     hittingMenuButtonBrightensScreen();
 
     if (USE_DEVICE_EMULATION) { HardwareFactory.enableDeviceEmulation(); }
+    setCameraView();
   }
 
   @Override
