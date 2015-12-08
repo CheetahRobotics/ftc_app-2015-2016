@@ -94,6 +94,7 @@ public class FtcOpModeRegister implements OpModeRegister {
 
     manager.register("BeaconSeekerAuto", BeaconSeekerOp.class);
     manager.register("PushBotManual", PushBotManual.class);
+    manager.register("DRWAuto", DRWAuto.class);
     manager.register("PushBotAuto", PushBotAuto.class);
     manager.register("PushBotDriveTouch", PushBotDriveTouch.class);
     manager.register("PushBotIrSeek", PushBotIrSeek.class);
