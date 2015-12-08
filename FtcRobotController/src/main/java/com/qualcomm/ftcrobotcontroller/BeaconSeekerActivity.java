@@ -50,8 +50,10 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
     String         _configPath = "/sdcard/FIRST/calibration.txt";
     String _configFileVersion = "Version1";     // One word! no spaces. Using Scanner to read....
 
-    protected enum BeaconSeekerStateEnum { On, Off }
-    protected BeaconSeekerStateEnum mBeaconSeekerState = BeaconSeekerStateEnum.On;
+    public enum BeaconSeekerStateEnum { On, Off }
+
+    // global, static. yuck.
+    public static BeaconSeekerStateEnum mBeaconSeekerState = BeaconSeekerStateEnum.Off;
     protected String mBeaconSeekerStatusMessage = "";
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -146,18 +148,12 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
     protected void onResume() {
         Log.i(TAG, "-------- in onResume() ----------");
         super.onResume();
-        if (mBeaconSeekerState == BeaconSeekerStateEnum.On) {
-            if (!OpenCVLoader.initDebug()) {
-                Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-                OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
-            } else {
-                Log.d(TAG, "OpenCV library found inside package. Using it!");
-                mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-            }
-        }
-        else {
-            if (mOpenCvCameraView != null)
-                mOpenCvCameraView.disableView();
+        if (!OpenCVLoader.initDebug()) {
+            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+        } else {
+            Log.d(TAG, "OpenCV library found inside package. Using it!");
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
     }
 

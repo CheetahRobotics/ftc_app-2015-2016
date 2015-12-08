@@ -58,8 +58,7 @@ public class BeaconSeekerOp extends OpMode {
 
   @Override
   public void init() {
-//    motorRight = hardwareMap.dcMotor.get("motor_2");
-//    motorLeft = hardwareMap.dcMotor.get("motor_1");
+    BeaconSeekerActivity.mBeaconSeekerState = BeaconSeekerActivity.BeaconSeekerStateEnum.On;
   }
 
   @Override
@@ -74,5 +73,9 @@ public class BeaconSeekerOp extends OpMode {
     telemetry.addData("Beacon X,Y (Percent)", ((int) (100*BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
             ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
 
+  }
+  @Override
+  public void stop() {
+    BeaconSeekerActivity.mBeaconSeekerState = BeaconSeekerActivity.BeaconSeekerStateEnum.Off;
   }
 }
