@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * BeaconSeeker Code. I tried to minmize changes to FtcRobotControllerActivity. Only 2 lines are change here.
+ * BeaconSeeker Code. I tried to minmize changes to FtcRobotControllerActivity. Only 2 lines are changed there.
  * This routine simply over-rides the Android life-cycle routines and inserts itself as needed.
  * Of course the layout had to be changed too to include the camera preview.
  * This code can be turned off at run time to improve performance if needed. See turnOffBeaconSeeker().
