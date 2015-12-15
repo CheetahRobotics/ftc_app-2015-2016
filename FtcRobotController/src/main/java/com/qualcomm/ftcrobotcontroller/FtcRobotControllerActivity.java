@@ -40,6 +40,9 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.hardware.usb.UsbManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -137,6 +140,13 @@ public class FtcRobotControllerActivity extends BeaconSeekerActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    try {
+      Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+      Ringtone r = RingtoneManager.getRingtone(this, notification);
+      r.play();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     setContentView(R.layout.activity_ftc_controller);
 
