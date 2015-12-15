@@ -35,7 +35,7 @@ import java.util.Scanner;
  */
 public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String  TAG              = "BeaconSeekerActivity";
-    private CameraBridgeViewBase mOpenCvCameraView;
+    private static CameraBridgeViewBase mOpenCvCameraView;
     private ColorBlobDetector    mDetectorPink;
     private ColorBlobDetector    mDetectorBlue;
     private Scalar               mBlobColorRgbaPink;
@@ -52,9 +52,19 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
 
     public enum BeaconSeekerStateEnum { On, Off }
 
-    // global, static. yuck.
-    public static BeaconSeekerStateEnum mBeaconSeekerState = BeaconSeekerStateEnum.Off;
+    private static BeaconSeekerStateEnum mBeaconSeekerState = BeaconSeekerStateEnum.Off;
     protected String mBeaconSeekerStatusMessage = "";
+
+    public static void enableBeaconSeeker() {
+        mBeaconSeekerState = mBeaconSeekerState.On;
+        mOpenCvCameraView.enableView();
+        mOpenCvCameraView.enableFpsMeter();
+    }
+    public static void disableBeaconSeeker() {
+        mBeaconSeekerState = mBeaconSeekerState.Off;
+        mOpenCvCameraView.disableView();
+        mOpenCvCameraView.disableFpsMeter();
+    }
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -63,8 +73,6 @@ public class BeaconSeekerActivity extends Activity implements CameraBridgeViewBa
                 case LoaderCallbackInterface.SUCCESS:
                 {
                     Log.i(TAG, "OpenCV loaded successfully");
-                    mOpenCvCameraView.enableView();
-                    mOpenCvCameraView.enableFpsMeter();
                 } break;
                 default:
                 {
