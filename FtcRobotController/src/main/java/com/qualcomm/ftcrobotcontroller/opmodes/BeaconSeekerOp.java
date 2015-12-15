@@ -70,8 +70,15 @@ public class BeaconSeekerOp extends OpMode {
   public void loop() {
 
     telemetry.addData("Beacon X,Y (Pixels)", ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.x) + "," + ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.y));
+
     telemetry.addData("Beacon X,Y (Percent)", ((int) (100*BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
             ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
+
+    if (BeaconSeekerActivity.mBeaconCenterPointPercent.x > 0.5)
+      telemetry.addData (  "Beacon X (Percent)", " > 50 right" );
+    else
+      telemetry.addData ("Beacon X (Percent)", " < 50 left" );
+
 
   }
   @Override
