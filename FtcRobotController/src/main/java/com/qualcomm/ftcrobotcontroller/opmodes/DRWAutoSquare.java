@@ -5,10 +5,10 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.util.Log;
 
-public class DRWAuto extends PushBotTelemetry
+public class DRWAutoSquare extends PushBotTelemetry
 
 {
-    public DRWAuto ()
+    public DRWAutoSquare ()
 
     {
         v_state = 0;
@@ -24,6 +24,13 @@ public class DRWAuto extends PushBotTelemetry
         v_state = 0;
         Log.i("test", "init");
         update_telemetry (); // Update common telemetry
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(hardwareMap.appContext, notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override public void loop ()
     {
@@ -40,7 +47,7 @@ public class DRWAuto extends PushBotTelemetry
 
                 set_drive_power (0.5f, 0.5f);
 
-                if (have_drive_encoders_reached(16501,16501))
+                if (have_drive_encoders_reached(2880,2880))
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -71,7 +78,69 @@ public class DRWAuto extends PushBotTelemetry
                     v_state++;
                 }
                 break;
+            case 4:
+                Log.i("test", "case 3");
+                run_using_encoders ();
 
+                set_drive_power (-0.5f, 0.5f);
+
+                if (has_right_drive_encoder_reached(10880))
+                {
+                    set_drive_power(0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+            case 5:
+                Log.i("test", "case 3");
+                run_using_encoders ();
+
+                set_drive_power (0.5f, 0.5f);
+
+                if (has_right_drive_encoder_reached(16880))
+                {
+                    set_drive_power(0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+            case 6:
+                Log.i("test", "case 3");
+                run_using_encoders ();
+
+                set_drive_power (-0.5f, 0.5f);
+
+                if (has_right_drive_encoder_reached(18880))
+                {
+                    set_drive_power(0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+
+            case 7:
+                Log.i("test", "case 3");
+                run_using_encoders ();
+
+                set_drive_power (0.5f, 0.5f);
+
+                if (has_right_drive_encoder_reached(22880))
+                {
+                    set_drive_power(0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+            case 8:
+                Log.i("test", "case 3");
+                run_using_encoders ();
+
+                set_drive_power (-0.5f, 0.5f);
+
+                if (has_right_drive_encoder_reached(25880))
+                {
+                    set_drive_power(0.0f, 0.0f);
+                    v_state++;
+                }
+                break;
+            default:
+                break;
         }
 
         // Send telemetry data to the driver station.
