@@ -9,7 +9,7 @@ public class BeaconSeekerOp extends OpMode {
 
   @Override
   public void init() {
-    BeaconSeekerActivity.mBeaconSeekerState = BeaconSeekerActivity.BeaconSeekerStateEnum.On;
+    BeaconSeekerActivity.enableBeaconSeeker();
   }
 
   @Override
@@ -34,6 +34,6 @@ public class BeaconSeekerOp extends OpMode {
   }
   @Override
   public void stop() {
-    BeaconSeekerActivity.mBeaconSeekerState = BeaconSeekerActivity.BeaconSeekerStateEnum.Off;
+    BeaconSeekerActivity.disableBeaconSeeker();
   }
 }
