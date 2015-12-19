@@ -38,9 +38,9 @@ public class DRWAuto extends PushBotTelemetry
                 Log.i("test", "case 1");
                 run_using_encoders();
 
-                set_drive_power (0.7f, 0.7f);
+                set_drive_power (-0.7f, -0.7f);
 
-                if (have_drive_encoders_reached(16501,16501))
+                if (a_right_encoder_count () < -16501)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -50,9 +50,9 @@ public class DRWAuto extends PushBotTelemetry
                 Log.i("test", "case 2");
                 run_using_encoders ();
 
-                set_drive_power (-0.5f, 0.5f);
+                set_drive_power (0.5f, -0.5f);
 
-                if (has_right_drive_encoder_reached(19000))
+                if (a_right_encoder_count () < -19300)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -65,7 +65,7 @@ public class DRWAuto extends PushBotTelemetry
 
                 set_drive_power (-0.7f, -0.7f);
 
-                if (has_right_drive_encoder_reached(2000))
+                if (a_right_encoder_count () < -29000)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
