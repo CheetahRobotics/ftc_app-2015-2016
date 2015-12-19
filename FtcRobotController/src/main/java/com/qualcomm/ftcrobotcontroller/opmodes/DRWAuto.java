@@ -38,7 +38,7 @@ public class DRWAuto extends PushBotTelemetry
                 Log.i("test", "case 1");
                 run_using_encoders();
 
-                set_drive_power (0.5f, 0.5f);
+                set_drive_power (0.7f, 0.7f);
 
                 if (have_drive_encoders_reached(16501,16501))
                 {
@@ -52,7 +52,7 @@ public class DRWAuto extends PushBotTelemetry
 
                 set_drive_power (-0.5f, 0.5f);
 
-                if (has_right_drive_encoder_reached(4880))
+                if (has_right_drive_encoder_reached(19000))
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -63,15 +63,28 @@ public class DRWAuto extends PushBotTelemetry
                 Log.i("test", "case 3");
                 run_using_encoders ();
 
-                set_drive_power (0.5f, 0.5f);
+                set_drive_power (-0.7f, -0.7f);
 
-                if (has_right_drive_encoder_reached(7880))
+                if (has_right_drive_encoder_reached(2000))
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
+
                 }
                 break;
-
+//            case 3:
+//                Log.i("test", "case 3");
+//                run_using_encoders ();
+//
+//                set_drive_power (0.7f, 0.7f);
+//
+//                if (has_right_drive_encoder_reached(20000))
+//                {
+//                    set_drive_power(0.0f, 0.0f);
+//                    v_state++;
+//                }
+//                break;
+//
         }
 
         // Send telemetry data to the driver station.
