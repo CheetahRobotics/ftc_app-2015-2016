@@ -88,7 +88,7 @@ public class DRWAuto extends PushBotTelemetry
         }
 
         // Send telemetry data to the driver station.
-        update_telemetry (); // Update common telemetry
+        update_telemetry(); // Update common telemetry
         telemetry.addData ("20", "State: " + v_state);
 
     } // loop
