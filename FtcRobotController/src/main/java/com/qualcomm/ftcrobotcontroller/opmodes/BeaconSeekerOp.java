@@ -40,20 +40,6 @@ public class BeaconSeekerOp extends PushBotTelemetry {
         telemetry.addData("Beacon X,Y (Percent)", ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
                 ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
 
-        if (count%50 == 0) {
-            if (BeaconSeekerActivity.mBeaconCenterPointPixels.x > 0 && BeaconSeekerActivity.mBeaconCenterPointPixels.y > 0) {
-
-                if (BeaconSeekerActivity.mBeaconCenterPointPercent.y > 0.5) {
-                    this.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
-                    telemetry.addData("Beacon Y (Percent)", " > 50 ");
-                    //set_drive_power(-0.5f, 0.5f);
-                } else {
-                    this.toneGen1.startTone(ToneGenerator.TONE_DTMF_A, 150);
-                    telemetry.addData("Beacon Y (Percent)", " < 50 ");
-                    //set_drive_power(0.5f, -0.5f);
-                }
-            }
-        }
         telemetry.addData("State = ", v_state);
 
 
@@ -66,9 +52,24 @@ public class BeaconSeekerOp extends PushBotTelemetry {
             case 1:
                 run_using_encoders();
 
-                set_drive_power(0.0f, 0.00f);
+                if (count%50 == 0) {
+                    if (BeaconSeekerActivity.mBeaconCenterPointPixels.x > 0 && BeaconSeekerActivity.mBeaconCenterPointPixels.y > 0) {
 
-                if (have_drive_encoders_reached(16501, 16501)) {
+                        if (BeaconSeekerActivity.mBeaconCenterPointPercent.y > 0.5) {
+                            this.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
+                            telemetry.addData("Beacon Y (Percent)", " > 50 ");
+                            // TURN LEFT!!!!
+                            set_drive_power(-0.5f, 0.5f);
+                        } else {
+                            this.toneGen1.startTone(ToneGenerator.TONE_DTMF_A, 150);
+                            telemetry.addData("Beacon Y (Percent)", " < 50 ");
+                            set_drive_power(0.5f, -0.5f);
+                            // TURN RIGHT!!!
+                        }
+                    }
+                }
+
+                if (have_drive_encoders_reached(17501, 17501)) {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
                 }
@@ -76,24 +77,11 @@ public class BeaconSeekerOp extends PushBotTelemetry {
             case 2:
                 run_using_encoders();
 
-                if (has_right_drive_encoder_reached(4880)) {
-                    set_drive_power(0.0f, 0.0f);
-                    v_state++;
-
-                }
+                set_drive_power(0.0f, 0.0f);
+                v_state++;
                 break;
-            case 3:
-                Log.i("test", "case 3");
-                run_using_encoders();
-
-                set_drive_power(0.5f, 0.5f);
-
-                if (has_right_drive_encoder_reached(7880)) {
-                    set_drive_power(0.0f, 0.0f);
-                    v_state++;
-                }
+            default:
                 break;
-
         }
 
 
