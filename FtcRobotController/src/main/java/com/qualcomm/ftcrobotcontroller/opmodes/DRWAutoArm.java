@@ -8,6 +8,8 @@ import android.util.Log;
 public class DRWAutoArm extends PushBotTelemetry
 
 {
+    double _amount_rotated;
+    double _start_arm_encoder_count = 0;
     public DRWAutoArm ()
 
     {
@@ -23,7 +25,7 @@ public class DRWAutoArm extends PushBotTelemetry
         reset_drive_encoders();
         v_state = 0;
         Log.i("test", "init");
-        update_telemetry (); // Update common telemetry
+//        update_telemetry (); // Update common telemetry
     }
     @Override public void loop ()
     {
@@ -31,25 +33,26 @@ public class DRWAutoArm extends PushBotTelemetry
         {
             case 0:
                 Log.i("test", "case 0");
+                _start_arm_encoder_count = a_left_arm_encoder_count();
                 v_state++;
 
                 break;
             case 1:
                 Log.i("test", "case 1");
                 run_using_encoders();
-                m_left_arm_power (0.1);
-
-                if (a_left_encoder_count() > 500)
+                m_left_arm_power(-0.1);
+                _amount_rotated = _start_arm_encoder_count - a_left_arm_encoder_count();
+                if (_amount_rotated > 4240)
                 {
-                    set_drive_power(0.0f, 0.0f);
+                    m_left_arm_power (0.0);
                     v_state++;
                 }
                 break;
         }
 
         // Send telemetry data to the driver station.
-        update_telemetry (); // Update common telemetry
-        telemetry.addData ("20", "State: " + v_state);
+//        update_telemetry (); // Update common telemetry
+        telemetry.addData ("02", "amount rotated: " + _amount_rotated);
 
     } // loop
 
