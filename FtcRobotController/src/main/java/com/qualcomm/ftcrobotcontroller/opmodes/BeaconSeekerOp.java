@@ -32,13 +32,13 @@ public class BeaconSeekerOp extends PushBotTelemetry {
     @Override
     public void loop() {
         count = count + 1;
-        telemetry.addData("Count", count);
+        telemetry.addData("XXXXCount", count);
 
 
-        telemetry.addData("Beacon X,Y (Pixels)", ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.x) + "," + ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.y));
-
-        telemetry.addData("Beacon X,Y (Percent)", ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
-                ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
+//        telemetry.addData("Beacon X,Y (Pixels)", ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.x) + "," + ((int) BeaconSeekerActivity.mBeaconCenterPointPixels.y));
+//
+//        telemetry.addData("Beacon X,Y (Percent)", ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
+//                ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
 
         telemetry.addData("State = ", v_state);
 
@@ -49,10 +49,14 @@ public class BeaconSeekerOp extends PushBotTelemetry {
                 v_state++;
 
                 break;
+
             case 1:
                 run_using_encoders();
 
                 if (count%50 == 0) {
+                    telemetry.addData("Here! Count = ", count);
+                    telemetry.addData("Beacon X,Y (Percent)", ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.x)) + "%, " +
+                            ((int) (100 * BeaconSeekerActivity.mBeaconCenterPointPercent.y)) + "%");
                     if (BeaconSeekerActivity.mBeaconCenterPointPixels.x > 0 && BeaconSeekerActivity.mBeaconCenterPointPixels.y > 0) {
 
                         if (BeaconSeekerActivity.mBeaconCenterPointPercent.y > 0.5) {
@@ -68,11 +72,13 @@ public class BeaconSeekerOp extends PushBotTelemetry {
                         }
                     }
                 }
-
-                if (have_drive_encoders_reached(17501, 17501)) {
-                    set_drive_power(0.0f, 0.0f);
-                    v_state++;
-                }
+                telemetry.addData("Encoder", a_right_encoder_count());
+                //were checking the right encoder count
+                //Under this is checking both encodeer conuts
+//                if (have_drive_encoders_reached(17501, 17501)) {
+//                    set_drive_power(0.0f, 0.0f);
+//                    v_state++;
+//                }
                 break;
             case 2:
                 run_using_encoders();
