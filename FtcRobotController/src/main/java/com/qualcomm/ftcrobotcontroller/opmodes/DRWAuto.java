@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.util.Log;
 
 public class DRWAuto extends PushBotTelemetry
-
 {
+    double _start_arm_encoder_count = 0;
+    double _amount_rotated;
+
     public DRWAuto ()
 
     {
@@ -32,6 +34,7 @@ public class DRWAuto extends PushBotTelemetry
             case 0:
                 Log.i("test", "case 0");
                 v_state++;
+                _start_arm_encoder_count = a_left_arm_encoder_count();
 
                 break;
             case 1:
@@ -72,18 +75,17 @@ public class DRWAuto extends PushBotTelemetry
 
                 }
                 break;
-//            case 3:
-//                Log.i("test", "case 3");
-//                run_using_encoders ();
-//
-//                set_drive_power (0.7f, 0.7f);
-//
-//                if (has_right_drive_encoder_reached(20000))
-//                {
-//                    set_drive_power(0.0f, 0.0f);
-//                    v_state++;
-//                }
-//                break;
+            case 4:
+                Log.i("test", "case 1");
+                run_using_encoders();
+                m_left_arm_power(-0.1);
+                _amount_rotated = _start_arm_encoder_count = - a_left_arm_encoder_count();
+                if (_amount_rotated > 4240)
+                {
+                    m_left_arm_power(0.0);
+                    v_state++;
+                }
+                break;
 //
         }
 
