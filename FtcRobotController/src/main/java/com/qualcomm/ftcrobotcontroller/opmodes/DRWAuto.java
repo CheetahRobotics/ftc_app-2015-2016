@@ -55,7 +55,7 @@ public class DRWAuto extends PushBotTelemetry
 
                 set_drive_power (0.5f, -0.5f);
 
-                if (a_right_encoder_count () < -19300)
+                if (a_right_encoder_count () < -19500)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -68,7 +68,7 @@ public class DRWAuto extends PushBotTelemetry
 
                 set_drive_power (-0.7f, -0.7f);
 
-                if (a_right_encoder_count () < -29000)
+                if (a_right_encoder_count () < -42500)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
