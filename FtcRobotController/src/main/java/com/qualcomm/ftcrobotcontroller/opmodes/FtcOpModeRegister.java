@@ -72,16 +72,6 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("NullOp", NullOp.class);
 
 
-    /*
-     * The following example op modes are designed to work with a K9-style robot.
-     *  - K9TeleOp is a simple driver controlled program.
-     *  - K9IrSeeker uses a legacy IR seeker V2 sensor to follow a beacon.
-     *  - K9Line uses a legacy LEGO NXT light sensor to follow a white line.
-     */
-
-    manager.register("K9TeleOp", K9TeleOp.class);
-    manager.register("K9IrSeeker", K9IrSeeker.class);
-    manager.register("K9Line", K9Line.class);
 
     /*
      * The following example op modes are designed to work with a pushbot-style robot.
@@ -94,8 +84,8 @@ public class FtcOpModeRegister implements OpModeRegister {
 
     manager.register("BeaconSeekerAuto", BeaconSeekerOp.class);
     manager.register("PushBotManual", PushBotManual.class);
-    manager.register("DRWAutoArm", DRWAutoArm.class);
-    manager.register("DRWAuto", DRWAuto.class);
+    manager.register("DRWAutoBlue", DRWAutoBlue.class);
+    manager.register("DRWAutoRed", DRWAutoRed.class);
     manager.register("PushBotAuto", PushBotAuto.class);
     manager.register("PushBotDriveTouch", PushBotDriveTouch.class);
     manager.register("PushBotIrSeek", PushBotIrSeek.class);
