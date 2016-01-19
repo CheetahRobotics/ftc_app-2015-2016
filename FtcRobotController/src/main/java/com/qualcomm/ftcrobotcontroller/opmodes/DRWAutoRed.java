@@ -14,7 +14,7 @@ public class DRWAutoRed extends PushBotTelemetry
     double _start_arm_encoder_count = 0;
     double _amount_rotated;
     private TouchSensor v_sensor_touch;
-    private static ToneGenerator toneGen1;
+//    private static ToneGenerator toneGen1;
 
     public DRWAutoRed()
 
@@ -32,7 +32,7 @@ public class DRWAutoRed extends PushBotTelemetry
         v_state = 0;
         Log.i("test", "init");
         v_sensor_touch = hardwareMap.touchSensor.get("sensor_touch");
-        DRWAutoRed.toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+//        DRWAutoRed.toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
         update_telemetry(); // Update common telemetry
     }
     @Override public void loop ()
@@ -89,7 +89,7 @@ public class DRWAutoRed extends PushBotTelemetry
                 run_using_encoders();
                 m_left_arm_power(-0.1);
                 _amount_rotated = _start_arm_encoder_count = - a_left_arm_encoder_count();
-                DRWAutoRed.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
+//                DRWAutoRed.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
 
                 if (_amount_rotated > 4240) {
                     m_left_arm_power(0.0);

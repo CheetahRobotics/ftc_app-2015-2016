@@ -13,7 +13,7 @@ public class DRWAutoBlue extends PushBotTelemetry
     double _start_arm_encoder_count = 0;
     double _amount_rotated;
     private TouchSensor v_sensor_touch;
-    private static ToneGenerator toneGen1;
+//    private static ToneGenerator toneGen1;
 
     public DRWAutoBlue()
 
@@ -87,7 +87,7 @@ public class DRWAutoBlue extends PushBotTelemetry
                 run_using_encoders();
                 m_left_arm_power(-0.1);
                 _amount_rotated = _start_arm_encoder_count = - a_left_arm_encoder_count();
-                DRWAutoBlue.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
+//                DRWAutoBlue.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
 
                 if (_amount_rotated > 4240)
                 {
