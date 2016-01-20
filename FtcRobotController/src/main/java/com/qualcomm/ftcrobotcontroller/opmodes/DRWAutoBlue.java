@@ -85,7 +85,7 @@ public class DRWAutoBlue extends PushBotTelemetry
             case 4:
                 Log.i("test", "case 4");
                 run_using_encoders();
-                m_left_arm_power(-0.1);
+                m_left_arm_power(-.5);
                 _amount_rotated = _start_arm_encoder_count = - a_left_arm_encoder_count();
 //                DRWAutoBlue.toneGen1.startTone(ToneGenerator.TONE_PROP_BEEP, 150);
 
