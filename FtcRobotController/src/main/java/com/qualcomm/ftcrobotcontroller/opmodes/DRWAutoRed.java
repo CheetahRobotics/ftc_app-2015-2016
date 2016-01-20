@@ -64,7 +64,7 @@ public class DRWAutoRed extends PushBotTelemetry
 
                 set_drive_power (-0.5f, 0.5f);
 
-                if (a_right_encoder_count () > -14130)
+                if (a_right_encoder_count () > -14000)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
