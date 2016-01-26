@@ -48,9 +48,9 @@ public class DRWAutoBlue extends PushBotTelemetry
                 Log.i("test", "case 1");
                 run_using_encoders();
 
-                set_drive_power (-0.7f, -0.7f);
+                set_drive_power (-.2f, -.2f);
 
-                if (a_right_encoder_count () < -16501)
+                if (a_right_encoder_count () < -16551)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -62,7 +62,7 @@ public class DRWAutoBlue extends PushBotTelemetry
 
                 set_drive_power (0.5f, -0.5f);
 
-                if (a_right_encoder_count () < -19500)
+                if (a_right_encoder_count () < -19000)
                 {
                     set_drive_power(0.0f, 0.0f);
                     v_state++;
@@ -73,7 +73,7 @@ public class DRWAutoBlue extends PushBotTelemetry
                 Log.i("test", "case 3");
                 run_using_encoders ();
 
-                set_drive_power (-0.7f, -0.7f);
+                set_drive_power (-0.9f, -0.9f);
 
                 if (a_right_encoder_count () < -42500 || v_sensor_touch.isPressed())
                 {
